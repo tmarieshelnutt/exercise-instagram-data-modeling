@@ -48,6 +48,7 @@ class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
+    
 
 class Comment(Base):
     __tablename__ = 'comment'
@@ -59,4 +60,15 @@ class Comment(Base):
 class Media(Base):
     __tablename__ = 'media'
     id = Column(Integer, primary_key=True)
-    
+    type = Column(String(250))
+    url = Column(String(250))
+    post_id = Column(Integer, ForeignKey('post.id'))
+
+class Follower(Base):
+    __tablename__ = 'follower'
+    id = Column(Integer, primary_key=True)
+    user_from_id = Column(Integer, ForeignKey('user_from.id'))
+    user_to_id = Column(Integer, ForeignKey('user_to.id'))
+
+    def to_dict(self):
+        return {}
