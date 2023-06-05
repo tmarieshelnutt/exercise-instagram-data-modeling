@@ -35,3 +35,28 @@ try:
 except Exception as e:
     print("There was a problem genering the diagram")
     raise e
+
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    first_name = Column(String(250))
+    last_name = Column(String(250))
+    username = Column(String(250))
+    email = Column(String(250), nullable=False)
+
+class Post(Base):
+    __tablename__ = 'post'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+
+class Comment(Base):
+    __tablename__ = 'comment'
+    id = Column(Integer, primary_key=True)
+    comment_text = (String(250))
+    author_id = Column(Integer, ForeignKey('author.id'))
+    post_id = Column(Integer, ForeignKey('post.id'))
+    
+class Media(Base):
+    __tablename__ = 'media'
+    id = Column(Integer, primary_key=True)
+    
