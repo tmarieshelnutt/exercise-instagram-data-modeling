@@ -29,12 +29,7 @@ class Address(Base):
         return {}
 
 ## Draw from SQLAlchemy base
-try:
-    result = render_er(Base, 'diagram.png')
-    print("Success! Check the diagram.png file")
-except Exception as e:
-    print("There was a problem genering the diagram")
-    raise e
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -42,7 +37,7 @@ class User(Base):
     first_name = Column(String(250))
     last_name = Column(String(250))
     username = Column(String(250))
-    email = Column(String(250), nullable=False)
+    email = Column(String(250))
 
 class Post(Base):
     __tablename__ = 'post'
@@ -70,5 +65,10 @@ class Follower(Base):
     user_from_id = Column(Integer, ForeignKey('user_from.id'))
     user_to_id = Column(Integer, ForeignKey('user_to.id'))
 
-    def to_dict(self):
-        return {}
+    
+    try:
+    result = render_er(Base, 'diagram.png')
+    print("Success! Check the diagram.png file")
+except Exception as e:
+    print("There was a problem genering the diagram")
+    raise e
